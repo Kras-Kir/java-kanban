@@ -1,10 +1,32 @@
 import java.util.ArrayList;
 public class Epic extends Task {
-    public ArrayList<Integer> subtaskId;
+    private  ArrayList<Integer> subtaskId;
 
-    public Epic(String name, String description, Integer id, Status status,ArrayList<Integer> subtaskId) {
-        super(name, description, id, status);
-        this.subtaskId = subtaskId;
+    public Epic(String name, String description) {
+        super(name, description,Status.NEW);
+        this.subtaskId = new ArrayList<>();
+
+    }
+
+
+
+
+    public void deleteSubtaskId(Integer id){
+        if (subtaskId.contains(id)){
+            subtaskId.remove(id);
+        }
+    }
+
+    public  void deleteSubtaskId(){
+        subtaskId.clear();
+    }
+
+    public void addSubtaskId(Integer id){
+        subtaskId.add(id);
+    }
+
+    public ArrayList<Integer> getSubtaskId() {
+        return subtaskId;
     }
 
     @Override
@@ -17,4 +39,6 @@ public class Epic extends Task {
                 ", status='" + status + '\'' +
                 '}';
     }
+
+
 }
