@@ -40,18 +40,22 @@ public class Main {
 
 
 
-        Task task1update = new Task("Начать обучение на Яндекс Практикум", "",Status.DONE);
-        manager.updateTask(1,task1update);
-        Task task2update = new Task("Выбрать курс", "", Status.DONE);
-        manager.updateTask(2,task2update);
-        Subtask epic1subtask1 = new Subtask("Выбор района кв", "", Status.NEW, epic1.getId());
-        Subtask epic1subtask2 = new Subtask("Выбор этажа", "",Status.DONE, epic1.getId());
-        Subtask epic2subtask1 = new Subtask("Выбор марки","",  Status.DONE, epic2.getId());
+
+        task1.setStatus(Status.DONE);
+        manager.updateTask(task1);
+        System.out.println("Ид таска обнов" + task1.getId());
+        task2.setStatus(Status.DONE);
+        manager.updateTask(task2);
+        subtask1.setStatus(Status.NEW);
+        subtask2.setStatus(Status.DONE);
+        subtask1_2.setStatus(Status.DONE);
 
 
-        manager.updateSubtask(4,epic1subtask1);
-        manager.updateSubtask(5,epic1subtask2);
-        manager.updateSubtask(7,epic2subtask1);
+
+
+        manager.updateSubtask(subtask1);
+        manager.updateSubtask(subtask2);
+        manager.updateSubtask(subtask1_2);
 
         System.out.println("Список задач после обновления");
         System.out.println(manager.getTasks());

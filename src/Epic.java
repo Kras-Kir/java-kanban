@@ -26,7 +26,7 @@ public class Epic extends Task {
     }
 
     public ArrayList<Integer> getSubtaskId() {
-        return subtaskId;
+        return new ArrayList<>(subtaskId);
     }
 
     @Override
