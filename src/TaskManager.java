@@ -103,7 +103,8 @@ public class TaskManager {
     }
     //Обновление подзадач
     public void updateSubtask (Subtask newSubtask){
-            if (subtasks.containsKey(newSubtask.getId())){
+            if (subtasks.containsKey(newSubtask.getId())
+                    && newSubtask.getEpicId().equals(subtasks.get(newSubtask.getId()).getEpicId())){
                 subtasks.put(newSubtask.getId(),newSubtask);
                 Epic epic = epics.get(newSubtask.getEpicId());
                 updateEpicStatus(epic);
