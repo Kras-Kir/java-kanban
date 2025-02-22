@@ -1,12 +1,42 @@
+import model.*;
+import manager.*;
+import util.Managers;
+import status.Status;
 import java.util.ArrayList;
 
 public class Main {
+    private static void printAllTasks (TaskManager manager) {
+        System.out.println("Задачи:");
+        for (Task task : manager.getTasks()) {
+            System.out.println(task);
+        }
+        System.out.println("Эпики:");
+        for (Task epic : manager.getEpics()) {
+            System.out.println(epic);
+
+            for (Task task : manager.getEpicSubtask(epic.getId())) {
+                System.out.println("--> " + task);
+            }
+        }
+        System.out.println("Подзадачи:");
+        for (Task subtask : manager.getSubtasks()) {
+            System.out.println(subtask);
+        }
+
+        System.out.println("История:");
+        for (Task task : manager.getHistory()) {
+            System.out.println(task);
+        }
+    }
 
     public static void main(String[] args) {
 
         System.out.println("Поехали!");
 
-        TaskManager manager = new TaskManager();
+
+        TaskManager manager = Managers.getDefault();
+
+
 
         Task task1 = new Task("Начать обучение на Яндекс Практикум", "",Status.NEW);
         Task task2 = new Task("Выбрать курс", "",  Status.NEW);
@@ -27,9 +57,10 @@ public class Main {
 
         Epic epic2 = new Epic("Покупка машины", "");
         manager.addEpic(epic2);
-        Subtask subtask1_2 = new Subtask("Выбор марки", "", Status.NEW,epic2.id);
+        Subtask subtask1_2 = new Subtask("Выбор марки", "", Status.NEW,epic2.getId());
 
-
+        manager.taskById(1);
+        manager.epicById(3);
         manager.addSubtask(subtask1_2);
         System.out.println("Список задач");
         System.out.println(manager.getTasks());
@@ -37,13 +68,17 @@ public class Main {
         System.out.println(manager.getEpics());
         System.out.println("Список подзадач");
         System.out.println(manager.getSubtasks());
+        System.out.println("История просмотров");
+        
+        printAllTasks(manager);
+
+
 
 
 
 
         task1.setStatus(Status.DONE);
         manager.updateTask(task1);
-        System.out.println("Ид таска обнов" + task1.getId());
         task2.setStatus(Status.DONE);
         manager.updateTask(task2);
         subtask1.setStatus(Status.NEW);
@@ -80,6 +115,8 @@ public class Main {
         System.out.println(manager.getEpics());
         System.out.println("Список подзадач после удаления");
         System.out.println(manager.getSubtasks());
+
+
 
 
     }
