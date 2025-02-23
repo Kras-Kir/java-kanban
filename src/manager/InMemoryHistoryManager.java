@@ -11,7 +11,7 @@ private final ArrayList<Task> listHistory = new ArrayList<>();
         if (task != null){
             listHistory.add(task);
         }
-         if (listHistory.size() == LIST_SIZE){
+         if (listHistory.size() > LIST_SIZE){
             listHistory.remove(0);
          }
 
