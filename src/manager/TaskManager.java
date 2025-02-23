@@ -3,20 +3,20 @@ import model.Epic;
 import model.Subtask;
 import model.Task;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface TaskManager {
 
-    ArrayList<Task> getHistory();
+    List<Task> getHistory();
 
     //Получение списка задач
-    ArrayList<Task> getTasks();
+    List<Task> getTasks();
 
     //Получение списка эпиков
-    ArrayList<Epic> getEpics();
+    List<Epic> getEpics();
 
     //Получение списка подзадач
-    ArrayList<Subtask> getSubtasks();
+    List<Subtask> getSubtasks();
 
     //Удаление всех задач
     void deleteTask();
@@ -64,7 +64,7 @@ public interface TaskManager {
     void deleteByIdSubtask(Integer id);
 
     //Получение списка всех подзадач определённого эпика
-    ArrayList<Subtask> getEpicSubtask(Integer id);
+    List<Subtask> getEpicSubtask(Integer id);
 
 
 }

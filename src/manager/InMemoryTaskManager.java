@@ -4,7 +4,9 @@ import model.Epic;
 import model.Task;
 import model.Subtask;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.HashMap;
+import java.util.Map;
 import status.Status;
 
 public class InMemoryTaskManager implements TaskManager {
@@ -14,12 +16,12 @@ public class InMemoryTaskManager implements TaskManager {
 
 
 
-    private HashMap<Integer,Task> tasks = new HashMap<>();
-    private HashMap<Integer,Epic> epics = new HashMap<>();
-    private HashMap<Integer,Subtask> subtasks = new HashMap<>();
+    private Map<Integer,Task> tasks = new HashMap<>();
+    private Map<Integer,Epic> epics = new HashMap<>();
+    private Map<Integer,Subtask> subtasks = new HashMap<>();
 
 
-    public ArrayList<Task> getHistory(){
+    public List<Task> getHistory(){
         return historyManager.getHistory();
     }
 
@@ -35,7 +37,6 @@ public class InMemoryTaskManager implements TaskManager {
         ArrayList<Task> listTask = new ArrayList<>();
         for(Task task : tasks.values()){
             listTask.add(task);
-            historyManager.add(task);
         }
         return listTask;
     }
@@ -45,7 +46,6 @@ public class InMemoryTaskManager implements TaskManager {
         ArrayList<Epic> listEpic = new ArrayList<>();
         for(Epic epic : epics.values()){
             listEpic.add(epic);
-            historyManager.add(epic);
         }
         return listEpic;
     }
@@ -55,7 +55,6 @@ public class InMemoryTaskManager implements TaskManager {
         ArrayList<Subtask> listSubtask = new ArrayList<>();
         for(Subtask subtask : subtasks.values()){
             listSubtask.add(subtask);
-            historyManager.add(subtask);
         }
         return listSubtask;
     }
