@@ -1,6 +1,7 @@
 package model;
 import status.Status;
 import java.util.Objects;
+
 public class Subtask extends Task {
     private Integer epicId;
 
@@ -8,6 +9,7 @@ public class Subtask extends Task {
         super(name, description,  status);
         this.epicId = epicId;
     }
+    
     public Integer getEpicId() {
         return epicId;
     }
