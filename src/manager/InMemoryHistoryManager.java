@@ -8,7 +8,7 @@ public class InMemoryHistoryManager implements HistoryManager{
 private CustomLinkedList<Task> customList = new CustomLinkedList<>();
 private HashMap<Integer,Node> mapNode = new HashMap<>();
 
-//private final ArrayList<Task> listHistory = new ArrayList<>();
+
     public class CustomLinkedList<T>{
 private Node<T> head;
 private Node<T> tail;
@@ -70,8 +70,8 @@ private Node<T> tail;
         }
         customList.linkLast(node);
         mapNode.put(task.getId(),node);
-
     }
+
     @Override
     public void remove(int id){
         customList.removeNode(mapNode.get(id));

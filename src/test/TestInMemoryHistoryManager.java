@@ -8,12 +8,12 @@ import status.Status;
 import util.Managers;
 import org.junit.jupiter.api.BeforeEach;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
  class TestInMemoryHistoryManager {
      HistoryManager historyManager = Managers.getDefaultHistory();
      TaskManager manager = new InMemoryTaskManager();
+
      @BeforeEach
      void setUp() {
          HistoryManager historyManager = Managers.getDefaultHistory();

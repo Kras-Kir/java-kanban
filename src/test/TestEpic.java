@@ -5,11 +5,11 @@ import static org.junit.jupiter.api.Assertions.*;
 import manager.*;
 import model.Epic;
 import status.Status;
-
 import java.util.ArrayList;
 
 class TestEpic {
     TaskManager manager = new InMemoryTaskManager();
+
     @Test
     void testEpicAddEpicSubtask() {
         Epic epic = new Epic("epic", "");

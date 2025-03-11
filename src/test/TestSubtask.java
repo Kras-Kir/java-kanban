@@ -10,7 +10,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
  class TestSubtask {
 
-     TaskManager manager = new InMemoryTaskManager();
+  TaskManager manager = new InMemoryTaskManager();
+
   @Test
   void subtaskEpicSubtask() {
    Subtask subtask = new Subtask("subtask","", Status.NEW, 1);
@@ -19,7 +20,6 @@ import static org.junit.jupiter.api.Assertions.*;
    epic.setId(subtask.getId());
    manager.addEpic(epic);
    assertNotEquals(epic.getId(), subtask.getId(), "");
-
   }
 
   // Проверяем, что подзадача не хранит старый id

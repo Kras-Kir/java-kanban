@@ -7,7 +7,6 @@ import model.Subtask;
 import model.Task;
 import org.junit.jupiter.api.Test;
 import status.Status;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestInMemoryTaskManager {
