@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class InMemoryHistoryManager implements HistoryManager{
+public class InMemoryHistoryManager implements HistoryManager {
 private CustomLinkedList<Task> customList = new CustomLinkedList<>();
 private HashMap<Integer,Node> mapNode = new HashMap<>();
 
 
-    public class CustomLinkedList<T>{
+    public class CustomLinkedList<T> {
 private Node<T> head;
 private Node<T> tail;
 
@@ -65,7 +65,7 @@ private Node<T> tail;
     @Override
     public void add(Task task) {
         Node<Task> node = new Node<>(task,null,null);
-        if (mapNode.containsKey(node.data.getId())){
+        if (mapNode.containsKey(node.data.getId())) {
             remove(node.data.getId());
         }
         customList.linkLast(node);
@@ -73,7 +73,7 @@ private Node<T> tail;
     }
 
     @Override
-    public void remove(int id){
+    public void remove(int id) {
         customList.removeNode(mapNode.get(id));
         mapNode.remove(id);
     }

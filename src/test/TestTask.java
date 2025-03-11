@@ -7,7 +7,7 @@ import status.Status;
 
 
  class TestTask {
-     
+
      @Test
      void testTaskEqualityById() {
          Task task1 = new Task("Task 1", "",Status.NEW);
