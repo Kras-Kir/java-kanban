@@ -6,6 +6,8 @@ import manager.*;
 import model.Epic;
 import status.Status;
 
+import java.util.ArrayList;
+
 class TestEpic {
     TaskManager manager = new InMemoryTaskManager();
     @Test
@@ -19,8 +21,25 @@ class TestEpic {
 
     }
 
+    @Test
+    void testEpicDoesNotKeepOutdatedSubTaskIds() {
+        // Создаём эпик
+        Epic epic = new Epic( "1", "");
+        manager.addEpic(epic);
 
-    //не понимаю как организовать проверку, что объект Epic нельзя добавить в самого себя в виде подзадачи;
+        // Создаём подзадачи и добавляем их в эпик
+        Subtask subtask1 = new Subtask( "1", "", Status.NEW,epic.getId());
+        Subtask subtask2 = new Subtask( "2", "", Status.NEW,epic.getId());
+        manager.addSubtask(subtask1);
+        manager.addSubtask(subtask2);
+
+        // Удаляем одну из подзадач
+        manager.deleteByIdSubtask(subtask1.getId());
+
+        // Проверяем, что эпик не хранит не актуальный id
+        ArrayList<Integer> subtaskId = epic.getSubtaskId();
+        assertFalse(subtaskId.contains(subtask1.getId()));
+    }
 
 
 }

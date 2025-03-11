@@ -41,8 +41,10 @@ public class Main {
         Task task1 = new Task("Начать обучение на Яндекс Практикум", "",Status.NEW);
         Task task2 = new Task("Выбрать курс", "",  Status.NEW);
 
+
         manager.addTask(task1);
         manager.addTask(task2);
+
 
 
         Epic epic1 = new Epic("Покупка квартиры", "");
@@ -58,6 +60,7 @@ public class Main {
         Epic epic2 = new Epic("Покупка машины", "");
         manager.addEpic(epic2);
         Subtask subtask1_2 = new Subtask("Выбор марки", "", Status.NEW,epic2.getId());
+
 
         manager.taskById(1);
         manager.epicById(3);

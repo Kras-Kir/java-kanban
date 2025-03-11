@@ -21,4 +21,20 @@ import static org.junit.jupiter.api.Assertions.*;
    assertNotEquals(epic.getId(), subtask.getId(), "");
 
   }
+
+  // Проверяем, что подзадача не хранит старый id
+  @Test
+  void testRemovedSubTaskDoesNotKeepOldId() {
+   // Создаём подзадачу
+   Subtask subtask = new Subtask("1", "", Status.NEW, 10);
+
+   // Добавляем подзадачу в менеджер
+   manager.addSubtask(subtask);
+
+   // Удаляем подзадачу
+   manager.deleteByIdSubtask(subtask.getId());
+
+   // Проверяем, что подзадача не хранит старый id
+   assertNull(subtask.getId());
+  }
 }

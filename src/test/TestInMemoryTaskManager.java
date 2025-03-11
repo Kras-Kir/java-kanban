@@ -8,8 +8,7 @@ import model.Task;
 import org.junit.jupiter.api.Test;
 import status.Status;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 class TestInMemoryTaskManager {
 
@@ -57,4 +56,6 @@ class TestInMemoryTaskManager {
         assertEquals(task.getId(), managerTask.getId(), "id задачи остался неизменным");
         assertEquals(task.getStatus(), managerTask.getStatus(), "Статус задачи остался неизменным");
     }
+
+
 }
