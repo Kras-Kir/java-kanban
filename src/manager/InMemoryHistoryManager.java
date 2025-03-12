@@ -37,25 +37,45 @@ public class InMemoryHistoryManager implements HistoryManager {
 
         }
 
+        /* void removeNode(Node node) {
+             if (node == null) return;
+             Node nodeNext = node.next;
+             Node nodePrev = node.prev;
+
+             if (nodeNext != null && nodePrev == null) {
+                 head = null;
+                 tail = null;
+             }
+             if (nodeNext != null) {
+                 head = nodeNext;
+                 nodeNext.prev = null;
+             }
+             if (nodePrev != null) {
+                 tail = nodePrev;
+                 nodePrev.next = null;
+             }
+             if (nodeNext != null && nodePrev != null) {
+                 nodePrev.next = nodeNext;
+                 nodeNext.prev = nodePrev;
+             }
+         }*/
         void removeNode(Node node) {
             if (node == null) return;
+
             Node nodeNext = node.next;
             Node nodePrev = node.prev;
 
-            if (nodeNext != null && nodePrev == null) {
-                head = null;
-                tail = null;
-            }
-            if (nodeNext != null) {
+            if (nodePrev == null) {
+                // Удаляемый узел — это голова списка
                 head = nodeNext;
-                nodeNext.prev = null;
-            }
-            if (nodePrev != null) {
-                tail = nodePrev;
-                nodePrev.next = null;
-            }
-            if (nodeNext != null && nodePrev != null) {
+            } else {
                 nodePrev.next = nodeNext;
+            }
+
+            if (nodeNext == null) {
+                // Удаляемый узел — это хвост списка
+                tail = nodePrev;
+            } else {
                 nodeNext.prev = nodePrev;
             }
         }
