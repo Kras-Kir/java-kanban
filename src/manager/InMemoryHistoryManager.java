@@ -42,16 +42,15 @@ public class InMemoryHistoryManager implements HistoryManager {
             Node nodeNext = node.next;
             Node nodePrev = node.prev;
 
-            if (nodeNext == null && nodePrev == null) {
+            if (nodeNext != null && nodePrev == null) {
                 head = null;
                 tail = null;
-                node = null;
             }
-            if (nodeNext != null && nodePrev == null) {
+            if (nodeNext != null) {
                 head = nodeNext;
                 nodeNext.prev = null;
             }
-            if (nodeNext == null && nodePrev != null) {
+            if (nodePrev != null) {
                 tail = nodePrev;
                 nodePrev.next = null;
             }
@@ -65,12 +64,14 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     @Override
     public void add(Task task) {
-        Node<Task> node = new Node<>(task, null, null);
-        if (mapNode.containsKey(node.data.getId())) {
-            remove(node.data.getId());
+        if (task != null) {
+            Node<Task> node = new Node<>(task, null, null);
+            if (mapNode.containsKey(node.data.getId())) {
+                remove(node.data.getId());
+            }
+            customList.linkLast(node);
+            mapNode.put(task.getId(), node);
         }
-        customList.linkLast(node);
-        mapNode.put(task.getId(), node);
     }
 
     @Override
