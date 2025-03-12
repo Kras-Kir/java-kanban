@@ -193,8 +193,8 @@ public class InMemoryTaskManager implements TaskManager {
                 historyManager.remove(subtaskId);
             }
         }
-
         epics.remove(id);
+        historyManager.remove(id);
     }
 
     //Удаление подзадач по идентификатору
