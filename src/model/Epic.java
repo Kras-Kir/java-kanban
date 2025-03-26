@@ -1,31 +1,31 @@
 package model;
+
 import status.Status;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class Epic extends Task {
-    private  ArrayList<Integer> subtaskId;
+    private ArrayList<Integer> subtaskId;
 
     public Epic(String name, String description) {
-        super(name, description,Status.NEW);
+        super(name, description, Status.NEW);
         this.subtaskId = new ArrayList<>();
 
     }
 
 
-
-
-    public void deleteSubtaskId(Integer id){
-        if (subtaskId.contains(id)){
+    public void deleteSubtaskId(Integer id) {
+        if (subtaskId.contains(id)) {
             subtaskId.remove(id);
         }
     }
 
-    public  void deleteSubtaskId(){
+    public void deleteSubtaskId() {
         subtaskId.clear();
     }
 
-    public void addSubtaskId(Integer id){
+    public void addSubtaskId(Integer id) {
         subtaskId.add(id);
     }
 
@@ -50,8 +50,8 @@ public class Epic extends Task {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Epic epic = (Epic) o;
-        return id == epic.id && Objects.equals(name, epic.name) && Objects.equals(description,epic.description) &&
-                Objects.equals(status,epic.status);
+        return id == epic.id && Objects.equals(name, epic.name) && Objects.equals(description, epic.description) &&
+                Objects.equals(status, epic.status);
     }
 
 
