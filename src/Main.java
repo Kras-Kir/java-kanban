@@ -56,11 +56,11 @@ public class Main {
 
         Epic epic2 = new Epic("Покупка машины", "");
         manager.addEpic(epic2);
-        Subtask subtask1_2 = new Subtask("Выбор марки", "", Status.NEW, epic2.getId());
+        Subtask subtask12 = new Subtask("Выбор марки", "", Status.NEW, epic2.getId());
 
         manager.taskById(1);
         manager.epicById(3);
-        manager.addSubtask(subtask1_2);
+        manager.addSubtask(subtask12);
         System.out.println("Список задач");
         System.out.println(manager.getTasks());
         System.out.println("Список эпиков");
@@ -78,12 +78,12 @@ public class Main {
         manager.updateTask(task2);
         subtask1.setStatus(Status.NEW);
         subtask2.setStatus(Status.DONE);
-        subtask1_2.setStatus(Status.DONE);
+        subtask12.setStatus(Status.DONE);
 
 
         manager.updateSubtask(subtask1);
         manager.updateSubtask(subtask2);
-        manager.updateSubtask(subtask1_2);
+        manager.updateSubtask(subtask12);
 
         System.out.println("Список задач после обновления");
         System.out.println(manager.getTasks());
