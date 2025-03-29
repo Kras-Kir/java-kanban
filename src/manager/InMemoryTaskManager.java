@@ -1,16 +1,15 @@
 package manager;
 
-import util.Managers;
 import model.Epic;
-import model.Task;
 import model.Subtask;
+import model.Task;
+import status.Status;
+import util.Managers;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
-import status.Status;
 
 public class InMemoryTaskManager implements TaskManager {
     private Integer id = 0;
@@ -253,5 +252,23 @@ public class InMemoryTaskManager implements TaskManager {
             epic.setStatus(Status.IN_PROGRES);
         }
 
+    }
+
+    protected void directTaskPut(Task task) {
+        tasks.put(task.getId(), task);
+    }
+
+    protected void directEpicPut(Epic epic) {
+        epics.put(epic.getId(), epic);
+    }
+
+    protected void directSubtaskPut(Subtask subtask) {
+        subtasks.put(subtask.getId(), subtask);
+    }
+
+    protected void updateIdCounter(int loadId) {
+        if (loadId >= this.id) {
+            this.id = loadId + 1;
+        }
     }
 }
