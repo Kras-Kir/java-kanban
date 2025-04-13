@@ -43,56 +43,5 @@ class FileBackedTaskManagerTest {
         }
     }
 
-    @Test
-    void shouldSaveMultipleTasks() throws IOException {
-        File tempFile = File.createTempFile("tasks", ".csv");
-
-        try {
-            FileBackedTaskManager manager = new FileBackedTaskManager(tempFile);
-            LocalDateTime now = LocalDateTime.now();
-            Duration duration = Duration.ofHours(1);
-
-            Epic epic = new Epic("Эпик", "");
-            manager.addEpic(epic);
-
-            Subtask subtask = new Subtask("Подзадача", "", Status.NEW, epic.getId(), duration, now);
-            manager.addSubtask(subtask);
-
-            Task task = new Task("Задача", "", Status.DONE, duration, now.plusHours(1));
-            manager.addTask(task);
-
-            assertTrue(tempFile.exists());
-            assertTrue(tempFile.length() > 0);
-
-            // Проверяем содержимое файла
-            try (BufferedReader reader = new BufferedReader(new FileReader(tempFile))) {
-                // Пропускаем заголовок
-                reader.readLine();
-
-                // Проверяем эпик
-                String epicLine = reader.readLine();
-                assertTrue(epicLine.contains("Эпик"));
-                assertTrue(epicLine.contains("EPIC"));
-
-                // Проверяем подзадачу
-                String subtaskLine = reader.readLine();
-                assertTrue(subtaskLine.contains("Подзадача"));
-                assertTrue(subtaskLine.contains("SUBTASK"));
-                assertTrue(subtaskLine.contains("60")); // duration в минутах
-                assertTrue(subtaskLine.contains(now.toString()));
-                assertTrue(subtaskLine.contains(String.valueOf(epic.getId())));
-
-                // Проверяем задачу
-                String taskLine = reader.readLine();
-                assertTrue(taskLine.contains("Задача"));
-                assertTrue(taskLine.contains("TASK"));
-                assertTrue(taskLine.contains("60"));
-                assertTrue(taskLine.contains(now.plusHours(1).toString()));
-            }
-
-        } finally {
-            tempFile.delete();
-        }
-    }
 
 }

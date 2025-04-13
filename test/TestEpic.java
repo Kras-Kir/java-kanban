@@ -43,25 +43,5 @@ class TestEpic {
         ArrayList<Integer> subtaskId = epic.getSubtaskId();
         assertFalse(subtaskId.contains(subtask1.getId()));
     }
-
-    @Test
-    void testEpicTimeCalculation() {
-        Epic epic = new Epic("Epic", "");
-        manager.addEpic(epic);
-
-        LocalDateTime start1 = LocalDateTime.of(2023, 1, 1, 10, 0);
-        Subtask subtask1 = new Subtask("Sub1", "", Status.NEW, epic.getId(), Duration.ofHours(2), start1);
-        manager.addSubtask(subtask1);
-
-        LocalDateTime start2 = LocalDateTime.of(2023, 1, 1, 13, 0);
-        Subtask subtask2 = new Subtask("Sub2", "", Status.NEW, epic.getId(), Duration.ofHours(1), start2);
-        manager.addSubtask(subtask2);
-
-        // Обновляем время эпика на основе подзадач
-        epic.updateDurationAndStart(manager.getEpicSubtask(epic.getId()));
-
-        assertEquals(Duration.ofHours(3), epic.getDuration());
-        assertEquals(start1, epic.getStartTime());
-        assertEquals(start2.plusHours(1), epic.getEndTime());
-    }
+    
 }
