@@ -5,7 +5,6 @@ import status.Status;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class Epic extends Task {
@@ -45,38 +44,6 @@ public class Epic extends Task {
 
     public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
-    }
-
-    public void updateDurationAndStart(List<Subtask> subtasks) {
-        if (subtasks.isEmpty()) {
-            setDuration(Duration.ZERO);
-            setStartTime(null);
-            setEndTime(null);
-            return;
-        }
-
-        Duration totalDuration = Duration.ZERO;
-        LocalDateTime earliestStart = null;
-        LocalDateTime latestEnd = null;
-
-        for (Subtask subtask : subtasks) {
-            totalDuration = totalDuration.plus(subtask.getDuration());
-
-            if (subtask.getStartTime() != null) {
-                if (earliestStart == null || subtask.getStartTime().isBefore(earliestStart)) {
-                    earliestStart = subtask.getStartTime();
-                }
-
-                LocalDateTime subtaskEnd = subtask.getEndTime();
-                if (latestEnd == null || subtaskEnd.isAfter(latestEnd)) {
-                    latestEnd = subtaskEnd;
-                }
-            }
-        }
-
-        setDuration(totalDuration);
-        setStartTime(earliestStart);
-        setEndTime(latestEnd);
     }
 
     @Override
