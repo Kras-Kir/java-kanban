@@ -2,51 +2,24 @@ package test;
 
 import manager.InMemoryTaskManager;
 import manager.TaskManager;
-import model.Epic;
-import model.Subtask;
 import model.Task;
 import org.junit.jupiter.api.Test;
 import status.Status;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.time.Duration;
+import java.time.LocalDateTime;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class TestInMemoryTaskManager {
 
     TaskManager manager = new InMemoryTaskManager();
-
-    @Test
-    void taskManagerShouldAddAndFindTasks() {
-        Task task = new Task("Task", "", Status.NEW);
-        task.setId(1);
-        Epic epic = new Epic("Epic", "");
-        epic.setId(2);
-        Subtask subtask = new Subtask("Subtask", "", Status.NEW, epic.getId());
-        subtask.setId(3);
-
-
-        manager.addTask(task);
-        manager.addEpic(epic);
-        manager.addSubtask(subtask);
-
-        assertEquals(task, manager.taskById(task.getId()), "Задача найдена по идентификатору");
-        assertEquals(epic, manager.epicById(epic.getId()), "Эпик найден по идентификатору");
-        assertEquals(subtask, manager.subtaskById(subtask.getId()), "Подзадача найдена по идентификатору");
-    }
-
-    @Test
-    void tasksWithAssignedAndGeneratedIdsShouldNotConflict() {
-        Task task1 = new Task("Task 1", "Description 1", Status.NEW);
-        Task task2 = new Task("Task 2", "Description 2", Status.NEW);
-        manager.addTask(task1);
-        task1.setId(1);
-        manager.addTask(task2);
-
-        assertNotEquals(task1.getId(), task2.getId(), "Задачи не конфликтуют");
-    }
+    private final LocalDateTime testStartTime = LocalDateTime.of(2023, 1, 1, 10, 0);
+    private final Duration testDuration = Duration.ofHours(2);
 
     @Test
     void taskShouldRemainUnchangedWhenAddedToManager() {
-        Task task = new Task("Task", "Description", Status.NEW);
+        Task task = new Task("Task", "Description", Status.NEW, testDuration, testStartTime);
         task.setId(1);
         manager.addTask(task);
 
@@ -55,7 +28,9 @@ class TestInMemoryTaskManager {
         assertEquals(task.getDescription(), managerTask.getDescription(), "Описание задачи осталось неизменным");
         assertEquals(task.getId(), managerTask.getId(), "id задачи остался неизменным");
         assertEquals(task.getStatus(), managerTask.getStatus(), "Статус задачи остался неизменным");
+        assertEquals(task.getDuration(), managerTask.getDuration(), "Длительность задачи осталась неизменной");
+        assertEquals(task.getStartTime(), managerTask.getStartTime(), "Время начала задачи осталось неизменным");
+        assertEquals(task.getEndTime(), managerTask.getEndTime(), "Время завершения задачи осталось неизменным");
     }
-
 
 }

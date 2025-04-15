@@ -3,10 +3,9 @@ package test;
 import manager.HistoryManager;
 import manager.TaskManager;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 import util.Managers;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class TestManagers {
     HistoryManager historyManager = Managers.getDefaultHistory();

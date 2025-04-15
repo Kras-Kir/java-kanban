@@ -7,6 +7,9 @@ import model.Subtask;
 import org.junit.jupiter.api.Test;
 import status.Status;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TestSubtask {
@@ -15,7 +18,8 @@ class TestSubtask {
 
     @Test
     void subtaskEpicSubtask() {
-        Subtask subtask = new Subtask("subtask", "", Status.NEW, 1);
+        LocalDateTime now = LocalDateTime.now();
+        Subtask subtask = new Subtask("subtask", "", Status.NEW, 1, Duration.ofMinutes(30), now);
         manager.addSubtask(subtask);
         Epic epic = new Epic("epic", "");
         epic.setId(subtask.getId());
@@ -23,19 +27,24 @@ class TestSubtask {
         assertNotEquals(epic.getId(), subtask.getId(), "");
     }
 
-    // Проверяем, что подзадача не хранит старый id
     @Test
     void testRemovedSubTaskDoesNotKeepOldId() {
-        // Создаём подзадачу
-        Subtask subtask = new Subtask("1", "", Status.NEW, 10);
-
-        // Добавляем подзадачу в менеджер
+        LocalDateTime now = LocalDateTime.now();
+        Subtask subtask = new Subtask("1", "", Status.NEW, 10, Duration.ofMinutes(30), now);
         manager.addSubtask(subtask);
-
-        // Удаляем подзадачу
         manager.deleteByIdSubtask(subtask.getId());
-
-        // Проверяем, что подзадача не хранит старый id
         assertNull(subtask.getId());
+    }
+
+    @Test
+    void testSubtaskTimeFields() {
+        LocalDateTime startTime = LocalDateTime.of(2023, 1, 1, 10, 0);
+        Duration duration = Duration.ofHours(2);
+        Subtask subtask = new Subtask("Subtask", "Desc", Status.NEW, 1, duration, startTime);
+
+        assertEquals(duration, subtask.getDuration());
+        assertEquals(startTime, subtask.getStartTime());
+        assertEquals(startTime.plus(duration), subtask.getEndTime());
+        assertEquals(1, subtask.getEpicId());
     }
 }
