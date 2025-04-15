@@ -84,8 +84,8 @@ public class InMemoryTaskManager implements TaskManager {
         subtasks.clear();
 
         epics.values().forEach(epic -> {
-            updateDurationAndStart(epic);
             epic.deleteSubtaskId();
+            updateDurationAndStart(epic);
             updateEpicStatus(epic);
         });
         prioritizedTasks.removeIf(task -> task instanceof Subtask);
