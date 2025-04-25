@@ -67,5 +67,7 @@ public interface TaskManager {
     //Получение списка всех подзадач определённого эпика
     List<Subtask> getEpicSubtask(Integer id);
 
+    List<Task> getPrioritizedTasks();
+
 
 }
