@@ -68,7 +68,7 @@ public class TaskHandler extends BaseHttpHandler implements HttpHandler {
 
             if (task.getId() == 0) {
                 taskManager.addTask(task);
-                sendText(h, "{\"result\":\"Task created\"}");
+                sendText(h, "{\"result\":\"Task created\", \"id\":" + task.getId() + "}");
             } else {
                 taskManager.updateTask(task);
                 sendText(h, "{\"result\":\"Task updated\"}");

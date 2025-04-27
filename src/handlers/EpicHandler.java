@@ -75,7 +75,7 @@ public class EpicHandler extends BaseHttpHandler implements HttpHandler {
 
             if (epic.getId() == 0) {
                 taskManager.addEpic(epic);
-                sendText(h, "{\"result\":\"Epic created\"}");
+                sendText(h, "{\"result\":\"Epic created\", \"id\":" + epic.getId() + "}");
             } else {
                 taskManager.updateEpic(epic);
                 sendText(h, "{\"result\":\"Epic updated\"}");

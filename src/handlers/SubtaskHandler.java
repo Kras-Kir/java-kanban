@@ -67,7 +67,7 @@ public class SubtaskHandler extends BaseHttpHandler implements HttpHandler {
 
             if (subtask.getId() == 0) {
                 taskManager.addSubtask(subtask);
-                sendText(h, "{\"result\":\"Subtask created\"}");
+                sendText(h, "{\"result\":\"Subtask created\", \"id\":" + subtask.getId() + "}");
             } else {
                 taskManager.updateSubtask(subtask);
                 sendText(h, "{\"result\":\"Subtask updated\"}");

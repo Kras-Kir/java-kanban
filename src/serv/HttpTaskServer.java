@@ -16,9 +16,9 @@ public class HttpTaskServer {
     private final TaskManager taskManager;
     private final Gson gson;
 
-    public HttpTaskServer() throws IOException {
-        taskManager = Managers.getDefault();
-        gson = new GsonBuilder().create();
+    public HttpTaskServer(TaskManager taskManager) throws IOException {
+        this.taskManager = taskManager;
+        this.gson = new GsonBuilder().create();
         server = HttpServer.create(new InetSocketAddress(PORT), 0);
 
         server.createContext("/tasks", new TaskHandler(taskManager, gson));
@@ -26,6 +26,11 @@ public class HttpTaskServer {
         server.createContext("/epics", new EpicHandler(taskManager, gson));
         server.createContext("/history", new HistoryHandler(taskManager, gson));
         server.createContext("/prioritized", new PrioritizedHandler(taskManager, gson));
+    }
+
+    public static HttpTaskServer createWithDefaultManager() throws IOException {
+        TaskManager defaultManager = Managers.getDefault();
+        return new HttpTaskServer(defaultManager);
     }
 
     public void start() {
@@ -39,7 +44,7 @@ public class HttpTaskServer {
     }
 
     public static void main(String[] args) throws IOException {
-        HttpTaskServer server = new HttpTaskServer();
+        HttpTaskServer server = HttpTaskServer.createWithDefaultManager();
         server.start();
     }
 }
